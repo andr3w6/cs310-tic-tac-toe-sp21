@@ -3,7 +3,7 @@ package edu.jsu.mcis.cs310.tictactoe;
 /**
 * TicTacToeModel implements the Model for the Tic-Tac-Toe game.
 *
-* @author  Your Name
+* @author  Andrew Parton
 * @version 1.0
 */
 public class TicTacToeModel {
@@ -53,6 +53,9 @@ public class TicTacToeModel {
         /* Initialize board (fill with TicTacToeSquare.EMPTY) */
         
         // INSERT YOUR CODE HERE
+        for (int r = 0; r < board.length; r++)
+            for (int c = 0; c < board[r].length; c++)
+                board[r][c] = TicTacToeSquare.EMPTY;
         
     }
     /**
@@ -72,8 +75,20 @@ public class TicTacToeModel {
     public boolean makeMark(int row, int col) {
         
         // INSERT YOUR CODE HERE
-        
-        return false; // this is a stub; you may need to remove it later!
+        if(TicTacToeModel.isValidSquare)
+        {
+            if(TicTacToeModel.isSquareMarked)
+                //not done
+                if(xTurn == true)
+                xt.x 
+                //change turn
+                //xturn test then change turn
+
+
+                return true;
+        }
+        else
+            return false; // this is a stub; you may need to remove it later!
         
     }
     
@@ -89,7 +104,15 @@ public class TicTacToeModel {
     private boolean isValidSquare(int row, int col) {
         
         // INSERT YOUR CODE HERE
-        
+        int ro = row;
+        int co = col;
+
+        if(ro <= dimension)
+        {
+            if(co <= dimension)
+                return true;
+        }    
+        else
         return false; // this is a stub; you may need to remove it later!
         
     }
@@ -105,7 +128,13 @@ public class TicTacToeModel {
     private boolean isSquareMarked(int row, int col) {
                 
         // INSERT YOUR CODE HERE
+        int r = row;
+        int c = col;
         
+        
+        if(board[r][c] != TicTacToeSquare.EMPTY)
+            return true;
+        else       
         return false; // this is a stub; you may need to remove it later!
             
     }
