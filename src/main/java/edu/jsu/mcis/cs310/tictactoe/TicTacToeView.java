@@ -40,8 +40,32 @@ public class TicTacToeView {
     public TicTacToeMove getNextMove(boolean isXTurn) {
         
         // INSERT YOUR CODE HERE (refer to the example output on Canvas!)
+
+        Scanner scan = new Scanner(System.in); 
+        int player;
+        if(isXTurn == true)
+        {
+            player = 1;
+        }
+        else
+        {
+            player = 2;
+        }
+
+        System.out.println("Player " + player + " (" + isXTurn + ")" + "Move:" );
+        System.out.println("Enter the row and column numbers, separated by a space: ");
+        String useri = scan.nextLine();
         
-        return null; // this is a stub; you should remove it later!
+        String split[] = useri.split(" ");
+        String rowstr = split[0];
+        String colstr = split[1];
+
+        int rowint = Integer.parseInt(rowstr);
+        int colint = Integer.parseInt(colstr);
+
+        TicTacToeMove move = new TicTacToeMove(rowint, colint);
+
+        return move; // this is a stub; you should remove it later!
 
     }
     
