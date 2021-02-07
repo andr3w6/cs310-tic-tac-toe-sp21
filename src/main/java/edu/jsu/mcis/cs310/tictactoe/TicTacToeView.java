@@ -41,7 +41,7 @@ public class TicTacToeView {
         
         // INSERT YOUR CODE HERE (refer to the example output on Canvas!)
 
-        Scanner scan = new Scanner(System.in); 
+        //Scanner scan = new Scanner(System.in); 
         int player;
         if(isXTurn == true)
         {
@@ -54,7 +54,7 @@ public class TicTacToeView {
 
         System.out.println("Player " + player + " (" + isXTurn + ")" + "Move:" );
         System.out.println("Enter the row and column numbers, separated by a space: ");
-        String useri = scan.nextLine();
+        String useri = keyboard.nextLine();
         
         String split[] = useri.split(" ");
         String rowstr = split[0];

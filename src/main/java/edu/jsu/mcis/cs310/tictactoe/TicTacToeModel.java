@@ -78,7 +78,7 @@ public class TicTacToeModel {
         int r = row;
         int c = col;
 
-        if(isValidSquare(r, c) == true)
+        /*if(isValidSquare(r, c) == true)
         {
             if(isSquareMarked(r, c) == true)
             {
@@ -102,7 +102,7 @@ public class TicTacToeModel {
             }
                 
         }
-        else
+        else*/
             return false; // this is a stub; you may need to remove it later!
         
     }
@@ -122,12 +122,12 @@ public class TicTacToeModel {
         int ro = row;
         int co = col;
 
-        if(ro <= dimension)
+        /*if(ro <= dimension)
         {
             if(co <= dimension)
                 return true;
         }    
-        else
+        else*/
             return false; // this is a stub; you may need to remove it later!
         
     }
@@ -255,9 +255,9 @@ public class TicTacToeModel {
                 }
             }
         */
-        if(isMarkWin() == true)
+        /*if(isMarkWin() == true)
             return true;
-        else
+        else*/
             return false;
         
         
