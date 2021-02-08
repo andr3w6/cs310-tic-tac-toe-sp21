@@ -1,5 +1,7 @@
 package edu.jsu.mcis.cs310.tictactoe;
 
+
+
 /**
 * TicTacToeModel implements the Model for the Tic-Tac-Toe game.
 *
@@ -78,31 +80,22 @@ public class TicTacToeModel {
         int r = row;
         int c = col;
 
-        /*if(isValidSquare(r, c) == true)
-        {
-            if(isSquareMarked(r, c) == true)
-            {
+        if(isValidSquare(r, c) == true && isSquareMarked(r, c) == true)
+        {              
             //needs work
-                if(xTurn == true)
-                {
-                    board[r][c] = TicTacToeSquare.X;
-                    xTurn = false;
-                //change turn
-                //xturn test then change turn
-                }
-                else
-                {
-
-                    board[r][c] = TicTacToeSquare.O;
-                    xTurn = true;
-
-                }
-                
-                return true;
+            if(xTurn == true)
+            {
+                board[r][c] = TicTacToeSquare.X;
+                xTurn = false;                    
             }
-                
+            else
+            {
+                board[r][c] = TicTacToeSquare.O;
+                xTurn = true;
+            }                
+            return true;                            
         }
-        else*/
+        else
             return false; // this is a stub; you may need to remove it later!
         
     }
@@ -122,12 +115,11 @@ public class TicTacToeModel {
         int ro = row;
         int co = col;
 
-        /*if(ro <= dimension)
+        if(ro < dimension && co < dimension)
         {
-            if(co <= dimension)
-                return true;
+                return true;    
         }    
-        else*/
+        else
             return false; // this is a stub; you may need to remove it later!
         
     }
@@ -189,6 +181,14 @@ public class TicTacToeModel {
         
         // INSERT YOUR CODE HERE
 
+        /*if(isMarkWin() == true)
+        {
+            
+        }
+        else
+        {
+            return TicTacToeState.TIE;
+        }*/
         
         return null; // this is a stub; you should remove it later!
         
@@ -208,30 +208,104 @@ public class TicTacToeModel {
         //this.mark = mark; 1 less error when commented out
         // not done
 
-        if(mark != TicTacToeSquare.EMPTY)
-        {
-            for(int i = 0; i <= dimension; i++)      // tests diagonal
+        int i = 0; 
+        int k = 0;
+        int m = (dimension - 1);
+        int p = 0;
+        int s = 0;
+        int u = 0;
+        int w = 0;
+
+        int diag_a = 0;
+        int diag_b = 0;
+        int horiz = 0;
+        int vert = 0;
+
+
+            while(i < dimension)                   // tests diagonal
             {                                        //x
                 if(board[i][i] != mark)              // x
                 {                                    //  x
                     i = 60;
                 }
 
-                if(board[dimension][dimension] == mark)
+                if(board[(dimension - 1)][(dimension - 1)] == mark)
                 {
-                    return true;
+                    diag_a = 1;
                 }                
                 i++;
             }
 
+            while(k < dimension)                      // tests diagonal
+            {                                          //  x
+                                                       // x
+                if(board[k][m] != mark)                //x
+                {
+                    k = 60;
+                }
 
+                if(board[(dimension - 1)][0] == mark)
+                {
+                    diag_b = 1;
+                }
+                k++;
+                m--;
+            }
 
+            while(p != dimension)               //checks horizontal wins
+            {
+                if(board[p][s] == mark)
+                {
+                    s++;
 
+                }
+                else
+                {
+                    s = 0;
+                    p++;
+
+                }
+
+                if(s == (dimension - 1))                            //board [p][s] == board[][(dimension - 1)]
+                {                    
+                    horiz = 1;
+                    p = dimension;
+                    
+                    
+                }
+
+            }
+
+            while(w != dimension)        //checks vertical wins
+            {
+                if(board[u][w] == mark)
+                {
+                    u++;
+                }
+                else
+                {
+                    u = 0;
+                    w++;
+                }
+
+                if(u == (dimension - 1))
+                {
+                    vert = 1;
+                    w = dimension;
+                    
+                    
+                }
+
+            }
+        
+        
+        
+        if((diag_a == 1) || (diag_b == 1) || (horiz == 1) || (vert == 1))
+        {
+            return true;
         }
-        
-
-        
-        return false; // this is a stub; you may need to remove it later!
+        else
+            return false; // this is a stub; you may need to remove it later!
         
         
     }
@@ -245,20 +319,29 @@ public class TicTacToeModel {
     private boolean isTie() {
         
         // INSERT YOUR CODE HERE
-        /*for (int r = 0; r < board.length; r++)              // tests if there are empty spaces on the board
+        int tie = 0;
+
+        for (int r = 0; r < board.length; r++)              // tests if there are empty spaces on the board
             for (int c = 0; c < board[r].length; c++)
             {
                 if(board[r][c] == TicTacToeSquare.EMPTY);
                 {                    
+                    tie = 1;
                     r = 999;
-                    return false; // this is a stub; you may need to remove it later!
+                    
                 }
             }
-        */
+        
+        if(tie == 1)
+        {
+            return true;
+        }
+        else
+            return false;
         /*if(isMarkWin() == true)
             return true;
         else*/
-            return false;
+            
         
         
     }
