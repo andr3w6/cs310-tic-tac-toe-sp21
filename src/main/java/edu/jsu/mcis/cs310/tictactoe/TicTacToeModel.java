@@ -1,6 +1,6 @@
 package edu.jsu.mcis.cs310.tictactoe;
 
-
+//import jdk.vm.ci.code.site.Mark;
 
 /**
 * TicTacToeModel implements the Model for the Tic-Tac-Toe game.
@@ -56,7 +56,7 @@ public class TicTacToeModel {
         
         // INSERT YOUR CODE HERE
         for (int r = 0; r < board.length; r++)
-            for (int c = 0; c < board[r].length; c++)
+            for (int c = 0; c < board.length; c++)
                 board[r][c] = TicTacToeSquare.EMPTY;
         
     }
@@ -80,7 +80,7 @@ public class TicTacToeModel {
         int r = row;
         int c = col;
 
-        if(isValidSquare(r, c) == true && isSquareMarked(r, c) == true)
+        if(isValidSquare(r, c) == true && isSquareMarked(r, c) == false)
         {              
             //needs work
             if(xTurn == true)
@@ -117,7 +117,7 @@ public class TicTacToeModel {
 
         if(ro < dimension && co < dimension)
         {
-                return true;    
+            return true;    
         }    
         else
             return false; // this is a stub; you may need to remove it later!
@@ -181,16 +181,21 @@ public class TicTacToeModel {
         
         // INSERT YOUR CODE HERE
 
-        /*if(isMarkWin() == true)
+        if(isMarkWin(TicTacToeSquare.X) == true)
         {
-            
+            return TicTacToeState.X;
         }
-        else
+        else if(isMarkWin(TicTacToeSquare.O) == true)
+        {
+            return TicTacToeState.O;
+        }
+        else if((isTie() == true) && (isMarkWin(TicTacToeSquare.X) == false) && (isMarkWin(TicTacToeSquare.O) == false))
         {
             return TicTacToeState.TIE;
-        }*/
-        
-        return null; // this is a stub; you should remove it later!
+        }
+        else
+            return TicTacToeState.NONE;
+        //return null; // this is a stub; you should remove it later!
         
     }
     
@@ -321,18 +326,18 @@ public class TicTacToeModel {
         // INSERT YOUR CODE HERE
         int tie = 0;
 
-        for (int r = 0; r < board.length; r++)              // tests if there are empty spaces on the board
-            for (int c = 0; c < board[r].length; c++)
+        for (int r = 0; r < (dimension - 1); r++)              // tests if there are empty spaces on the board
+            for (int c = 0; c < (dimension - 1); c++)
             {
                 if(board[r][c] == TicTacToeSquare.EMPTY);
                 {                    
                     tie = 1;
-                    r = 999;
+                   
                     
                 }
             }
         
-        if(tie == 1)
+        if((tie == 0) && ((isMarkWin(TicTacToeSquare.X)) == false) && ((isMarkWin(TicTacToeSquare.O)) == false))
         {
             return true;
         }
@@ -396,10 +401,23 @@ public class TicTacToeModel {
     @Override
     public String toString() {
         
-        StringBuilder output = new StringBuilder();
+        StringBuilder output = new StringBuilder("  ");
         
         // INSERT YOUR CODE HERE
-        
+        int a = 0;
+        int b = 0;
+        while(a < dimension)
+        {
+            output.append(a);            
+            a++;
+        }
+
+        while(b < dimension)
+        {
+            output.append("\n" + b);
+            b++;
+        }
+
         return output.toString();
         
     }

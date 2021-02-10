@@ -41,29 +41,28 @@ public class TicTacToeView {
         
         // INSERT YOUR CODE HERE (refer to the example output on Canvas!)
 
-        //Scanner scan = new Scanner(System.in); 
+        
         int player;
+        String sym;
+        
         if(isXTurn == true)
         {
             player = 1;
+            sym = "X";
         }
         else
         {
             player = 2;
+            sym = "O";
         }
 
-        System.out.println("Player " + player + " (" + isXTurn + ")" + "Move:" );
+        System.out.println("Player " + player + " (" + sym + ")" + " Move:" );
         System.out.println("Enter the row and column numbers, separated by a space: ");
-        String useri = keyboard.nextLine();
+        int row = keyboard.nextInt();
+        int col = keyboard.nextInt();
         
-        String split[] = useri.split(" ");
-        String rowstr = split[0];
-        String colstr = split[1];
 
-        int rowint = Integer.parseInt(rowstr);
-        int colint = Integer.parseInt(colstr);
-
-        TicTacToeMove move = new TicTacToeMove(rowint, colint);
+        TicTacToeMove move = new TicTacToeMove(row, col);
 
         return move; // this is a stub; you should remove it later!
 

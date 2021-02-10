@@ -53,21 +53,14 @@ public class TicTacToeController {
             //String player_move = Integer.toString() //original step 2
             //view.getNextMove(model.isXTurn());
             
-            //view.getNextMove(model.isXTurn()); //step 2   might need work
+            TicTacToeMove move = view.getNextMove(model.isXTurn()); //step 2   might need work                                               
             
-            String p_move = (view.getNextMove(model.isXTurn())).toString();   
-            
-            String splitp_move[] = p_move.split(" ");
+            int row = move.getRow();
+            int col = move.getCol();
 
-            String rowstring = splitp_move[0];
-            String colstring = splitp_move[1];
-            
-            int rowint = Integer.parseInt(rowstring);
-            int colint = Integer.parseInt(colstring);            
+            model.makeMark(row, col);    //step 3
 
-            model.makeMark(rowint, colint);    //step 3
-
-            if(model.makeMark(rowint, colint) == false)
+            if(model.makeMark(row, col) == false)
             {
                 view.showInputError();
             }
