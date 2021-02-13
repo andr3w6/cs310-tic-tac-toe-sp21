@@ -1,7 +1,9 @@
 package edu.jsu.mcis.cs310.tictactoe;
 
-//import jdk.vm.ci.code.site.Mark;
+//import javax.xml.transform.OutputKeys;
 
+//import jdk.vm.ci.code.site.Mark;
+//import java.lang.*;
 /**
 * TicTacToeModel implements the Model for the Tic-Tac-Toe game.
 *
@@ -214,7 +216,7 @@ public class TicTacToeModel {
         // not done
 
         int i = 0; 
-        int k = 0;
+        int k = (dimension - 1);
         int m = (dimension - 1);
         int p = 0;
         int s = 0;
@@ -241,7 +243,7 @@ public class TicTacToeModel {
                 i++;
             }
 
-            while(k < dimension)                      // tests diagonal
+            while(k < dimension)                      // tests diagonal 
             {                                          //  x
                                                        // x
                 if(board[k][m] != mark)                //x
@@ -257,7 +259,7 @@ public class TicTacToeModel {
                 m--;
             }
 
-            while(p != dimension)               //checks horizontal wins
+            /*while(p != dimension)               //checks horizontal wins not working
             {
                 if(board[p][s] == mark)
                 {
@@ -281,7 +283,7 @@ public class TicTacToeModel {
 
             }
 
-            while(w != dimension)        //checks vertical wins
+            while(w != dimension)        //checks vertical wins not working
             {
                 if(board[u][w] == mark)
                 {
@@ -301,7 +303,7 @@ public class TicTacToeModel {
                     
                 }
 
-            }
+            }*/
         
         
         
@@ -401,21 +403,134 @@ public class TicTacToeModel {
     @Override
     public String toString() {
         
-        StringBuilder output = new StringBuilder("  ");
+        StringBuilder output = new StringBuilder("");//"  "
         
         // INSERT YOUR CODE HERE
-        int a = 0;
-        int b = 0;
-        while(a < dimension)
+        int a = (dimension + 2);    //for extended rows and columns with spaces;
+        
+
+
+        int b = 2; //counter for columns
+        int d = 0; //numbers for columns
+        int s = 0;
+
+
+        int e = 1; //counter for rows
+        int f = 0; //numbers for rows
+        int t = 0;
+        int u = 0;
+        
+
+        String disboard[][] = new String[a][a];
+
+
+
+        for (int r = 0; r < disboard.length; r++)          //sets every space as blank initially
+            for (int c = 0; c < disboard.length; c++)     // will say null on every space of not
+                disboard[r][c] = "";
+        
+        disboard[0][0] = " "; //empty space for corner
+        disboard[0][1] = " "; //
+
+
+        while(b < a)                  //for columns lable
         {
-            output.append(a);            
-            a++;
+            disboard[0][b] = Integer.toString(d);
+            b++;
+            d++;
+
         }
 
-        while(b < dimension)
+        /*while(s < a) //displays "  012"
         {
-            output.append("\n" + b);
-            b++;
+        output.append(disboard[0][s]);
+        s++;
+        }*/
+
+        while(e < a)                //for rows lable
+        {
+            disboard[e][0] = Integer.toString(f);
+            disboard[e][1] = " ";        //fixes some spacing issues might need something for columns
+            e++;
+            f++;
+        }
+
+        /*while(t < (a - 1))                  //displays    0        both just like his output
+        {                                   //            1        but only first column on new lines
+            output.append(disboard[t][0]);  //            2
+            t++;
+            
+            output.append("\n");
+
+        }*/
+        
+
+        /*for(int y = 0; y < disboard.length; y++)               // displays "  012"
+        {                                                      //           0
+            output.append("\n");                                //          1
+                                                                    //      2
+
+            for(int z = 0; z < disboard.length; z++)
+                if(y <= board.length)
+                {
+                    output.append(disboard[y][z]);
+                }
+        }*/
+
+        /*for (int r = 0; r < board.length; r++)
+        {
+            for (int c = 0; c < board.length; c++)
+            {
+                if(board[r][c].equals(TicTacToeSquare.X))
+                {
+                    disboard[(r + 2)][(c + 1)] = "X";
+                    //output.append(disboard[(r + 2)][(c + 1)]);
+                }
+                else if(board[r][c].equals(TicTacToeSquare.O))
+                {
+                    disboard[(r + 2)][(c + 1)] = "O";
+                    //output.append(disboard[(r + 2)][(c + 1)]);
+                }
+                
+            }
+        }*/
+
+        for(int roe = 0; roe < disboard.length; roe++)               // displays "  012"
+        {                                                      //           0
+            output.append("\n");                                //          1            roe = y
+                                                                    //      2            cal = z
+
+            for(int cal = 0; cal < disboard.length; cal++)
+            {
+                if(roe <= board.length)
+                {
+                    
+                    output.append(disboard[roe][cal]);
+                }
+
+
+                if((roe > 0) && (roe < (dimension + 1)) && (cal > 1)) //columns still wrong on output
+                {
+                    int r = (roe - 1);
+                    int c = (cal - 2);
+                    if(board[r][c].equals(TicTacToeSquare.X))
+                    {
+                        disboard[roe][cal] = "X";
+                        output.append(disboard[roe][cal]);
+                    }
+                    else if(board[r][c].equals(TicTacToeSquare.O))
+                    {
+                        disboard[roe][cal] = "O";
+                        output.append(disboard[roe][cal]);
+                    }
+                    else
+                    {
+                        disboard[roe][cal] = " ";
+                        output.append(disboard[roe][cal]);
+                    }                        
+
+                }  
+            }    
         }
 
         return output.toString();
