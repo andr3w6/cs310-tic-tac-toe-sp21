@@ -1,9 +1,5 @@
 package edu.jsu.mcis.cs310.tictactoe;
 
-//import javax.xml.transform.OutputKeys;
-
-//import jdk.vm.ci.code.site.Mark;
-//import java.lang.*;
 /**
 * TicTacToeModel implements the Model for the Tic-Tac-Toe game.
 *
@@ -56,7 +52,7 @@ public class TicTacToeModel {
 
         /* Initialize board (fill with TicTacToeSquare.EMPTY) */
         
-        // INSERT YOUR CODE HERE
+        
         for (int r = 0; r < board.length; r++)
             for (int c = 0; c < board.length; c++)
                 board[r][c] = TicTacToeSquare.EMPTY;
@@ -78,13 +74,13 @@ public class TicTacToeModel {
     */
     public boolean makeMark(int row, int col) {
         
-        // INSERT YOUR CODE HERE
+        
         int r = row;
         int c = col;
 
-        if(isValidSquare(r, c) == true && isSquareMarked(r, c) == false)
+        if((isValidSquare(r, c) == true) && (isSquareMarked(r, c) == false))
         {              
-            //needs work
+            
             if(xTurn == true)
             {
                 board[r][c] = TicTacToeSquare.X;
@@ -98,7 +94,7 @@ public class TicTacToeModel {
             return true;                            
         }
         else
-            return false; // this is a stub; you may need to remove it later!
+            return false; 
         
     }
     
@@ -113,16 +109,16 @@ public class TicTacToeModel {
     */
     private boolean isValidSquare(int row, int col) {
         
-        // INSERT YOUR CODE HERE
-        int ro = row;
-        int co = col;
+        
+        int r = row;
+        int c = col;
 
-        if(ro < dimension && co < dimension)
+        if((r < dimension) && (c < dimension) && (r >= 0) && (c >= 0))
         {
             return true;    
         }    
         else
-            return false; // this is a stub; you may need to remove it later!
+            return false; 
         
     }
     
@@ -140,13 +136,17 @@ public class TicTacToeModel {
         int r = row;
         int c = col;
         
-        
         if(board[r][c] != TicTacToeSquare.EMPTY)
+        {
             return true;
+        }
         else       
-            return false; // this is a stub; you may need to remove it later!
-            
+            return false; 
+                              
+        
+  
     }
+
     
     /**
     * Returns a {@link TicTacToeSquare} object representing the content of the
@@ -159,15 +159,10 @@ public class TicTacToeModel {
     */
     public TicTacToeSquare getSquare(int row, int col) {
         
-        // INSERT YOUR CODE HERE
-        //started 24
         int r = row;
         int c = col;
 
-        
-
         return board[r][c];
-        //return null; // this is a stub; you should remove it later!
             
     }
     
@@ -181,7 +176,6 @@ public class TicTacToeModel {
     */
     public TicTacToeState getState() {
         
-        // INSERT YOUR CODE HERE
 
         if(isMarkWin(TicTacToeSquare.X) == true)
         {
@@ -191,13 +185,12 @@ public class TicTacToeModel {
         {
             return TicTacToeState.O;
         }
-        else if((isTie() == true) && (isMarkWin(TicTacToeSquare.X) == false) && (isMarkWin(TicTacToeSquare.O) == false))
+        else if(isTie() == true)
         {
             return TicTacToeState.TIE;
         }
         else
             return TicTacToeState.NONE;
-        //return null; // this is a stub; you should remove it later!
         
     }
     
@@ -211,108 +204,127 @@ public class TicTacToeModel {
     */
     private boolean isMarkWin(TicTacToeSquare mark) {
         
-        // INSERT YOUR CODE HERE
-        //this.mark = mark; 1 less error when commented out
-        // not done
 
-        int i = 0; 
-        int k = (dimension - 1);
-        int m = (dimension - 1);
-        int p = 0;
+
+
+        int i = 0;                 //used for testing first diagonal wins
+        int k = (dimension - 1);   //used for second diagonal wins
+        int m = 0;               
+        int p = 0;                  //used for horizontal wins
         int s = 0;
-        int u = 0;
+        int u = 0;                  //used for vertical wins
         int w = 0;
 
-        int diag_a = 0;
-        int diag_b = 0;
+        int diag_a_count = 0;
+        int diag_b_count = 0;
+        int hcount = 0;
+        int vcount = 0;
+
+        int diag_exit_a = 0;        //used for exiting loops
+        int diag_exit_b = 0;
+        
+
+        int diag_a = 0;           // used to verify a win 
+        int diag_b = 0;           // will equal one if the condition was met
         int horiz = 0;
         int vert = 0;
 
 
-            while(i < dimension)                   // tests diagonal
-            {                                        //x
-                if(board[i][i] != mark)              // x
-                {                                    //  x
-                    i = 60;
+            while(diag_exit_a == 0)                   // tests diagonal (a)    
+            {                                         //x
+                for(i = 0; i < dimension; i++)        // x
+                {                                     //  x
+                    if(board[i][i] != mark)
+                    {
+                        diag_a_count++;
+                    }
                 }
 
-                if(board[(dimension - 1)][(dimension - 1)] == mark)
+                if(diag_a_count == 0)
                 {
                     diag_a = 1;
-                }                
-                i++;
+                }
+
+                diag_exit_a++;
+
             }
 
-            while(k < dimension)                      // tests diagonal 
-            {                                          //  x
-                                                       // x
-                if(board[k][m] != mark)                //x
+            while(diag_exit_b == 0)                      // tests diagonal (b)
+            {                
+
+                if(board[k][m] != mark)
                 {
-                    k = 60;
+                    diag_b_count++;
                 }
 
-                if(board[(dimension - 1)][0] == mark)
+                if(board[k][m] == board[0][(dimension - 1)])
                 {
-                    diag_b = 1;
+                    if(diag_b_count == 0)
+                    {
+                        diag_b = 1;
+                        diag_exit_b++;
+                    }
+                    else
+                        diag_exit_b++;
+
                 }
-                k++;
-                m--;
+                
+                    
+
+                k--;
+                m++;
             }
 
-            /*while(p != dimension)               //checks horizontal wins not working
-            {
-                if(board[p][s] == mark)
+            while(p < dimension)               //checks horizontal wins 
+            {   
+                for(s = 0; s < dimension; s++)
                 {
-                    s++;
-
-                }
-                else
-                {
-                    s = 0;
-                    p++;
-
+                    if(board[p][s] != mark)
+                    {
+                        hcount++;
+                    }
                 }
 
-                if(s == (dimension - 1))                            //board [p][s] == board[][(dimension - 1)]
-                {                    
+                if(hcount == 0)
+                {
                     horiz = 1;
                     p = dimension;
-                    
-                    
                 }
+
+                p++;
+                hcount = 0;
 
             }
 
-            while(w != dimension)        //checks vertical wins not working
+
+            while(w < dimension)        //checks vertical wins not working
             {
-                if(board[u][w] == mark)
+                for(u = 0; u < dimension; u++)
                 {
-                    u++;
-                }
-                else
-                {
-                    u = 0;
-                    w++;
+                    if(board[u][w] != mark)
+                    {
+                        vcount++;
+                    }
                 }
 
-                if(u == (dimension - 1))
+                if(vcount == 0)
                 {
                     vert = 1;
                     w = dimension;
-                    
-                    
                 }
 
-            }*/
+                w++;
+                vcount = 0;
+
+            }
         
-        
-        
+                
         if((diag_a == 1) || (diag_b == 1) || (horiz == 1) || (vert == 1))
         {
             return true;
         }
         else
-            return false; // this is a stub; you may need to remove it later!
+            return false; 
         
         
     }
@@ -325,29 +337,26 @@ public class TicTacToeModel {
     */	
     private boolean isTie() {
         
-        // INSERT YOUR CODE HERE
-        int tie = 0;
+        int count = 0;
 
-        for (int r = 0; r < (dimension - 1); r++)              // tests if there are empty spaces on the board
-            for (int c = 0; c < (dimension - 1); c++)
+        int spaces = (dimension * dimension);
+        
+        for (int r = 0; r < board.length; r++)
+            for (int c = 0; c < board.length; c++)
             {
-                if(board[r][c] == TicTacToeSquare.EMPTY);
-                {                    
-                    tie = 1;
-                   
-                    
+                if(board[r][c] != TicTacToeSquare.EMPTY)
+                {
+                    count++;
                 }
             }
-        
-        if((tie == 0) && ((isMarkWin(TicTacToeSquare.X)) == false) && ((isMarkWin(TicTacToeSquare.O)) == false))
+
+        if((spaces == count) && (isMarkWin(TicTacToeSquare.X) == false) && (isMarkWin(TicTacToeSquare.O) == false))
         {
             return true;
         }
         else
             return false;
-        /*if(isMarkWin() == true)
-            return true;
-        else*/
+        
             
         
         
@@ -403,30 +412,26 @@ public class TicTacToeModel {
     @Override
     public String toString() {
         
-        StringBuilder output = new StringBuilder("");//"  "
+        StringBuilder output = new StringBuilder("");
         
-        // INSERT YOUR CODE HERE
+  
         int a = (dimension + 2);    //for extended rows and columns with spaces;
         
 
 
         int b = 2; //counter for columns
-        int d = 0; //numbers for columns
-        int s = 0;
-
+        int d = 0; //numbers for columns   
 
         int e = 1; //counter for rows
         int f = 0; //numbers for rows
-        int t = 0;
-        int u = 0;
         
 
-        String disboard[][] = new String[a][a];
+        String disboard[][] = new String[a][a];   // a larger 2D array to display output
 
 
 
         for (int r = 0; r < disboard.length; r++)          //sets every space as blank initially
-            for (int c = 0; c < disboard.length; c++)     // will say null on every space of not
+            for (int c = 0; c < disboard.length; c++)     
                 disboard[r][c] = "";
         
         disboard[0][0] = " "; //empty space for corner
@@ -441,96 +446,53 @@ public class TicTacToeModel {
 
         }
 
-        /*while(s < a) //displays "  012"
-        {
-        output.append(disboard[0][s]);
-        s++;
-        }*/
+
 
         while(e < a)                //for rows lable
         {
             disboard[e][0] = Integer.toString(f);
-            disboard[e][1] = " ";        //fixes some spacing issues might need something for columns
+            disboard[e][1] = " ";        //fixes spacing 
             e++;
             f++;
         }
 
-        /*while(t < (a - 1))                  //displays    0        both just like his output
-        {                                   //            1        but only first column on new lines
-            output.append(disboard[t][0]);  //            2
-            t++;
-            
-            output.append("\n");
 
-        }*/
-        
+        for(int droe = 0; droe < disboard.length; droe++)               // displays "  012"
+        {                                                            //           0
+            output.append("\n");                                     //           1            
+                                                                    //            2           
 
-        /*for(int y = 0; y < disboard.length; y++)               // displays "  012"
-        {                                                      //           0
-            output.append("\n");                                //          1
-                                                                    //      2
-
-            for(int z = 0; z < disboard.length; z++)
-                if(y <= board.length)
-                {
-                    output.append(disboard[y][z]);
-                }
-        }*/
-
-        /*for (int r = 0; r < board.length; r++)
-        {
-            for (int c = 0; c < board.length; c++)
+            for(int dcol = 0; dcol < disboard.length; dcol++)
             {
-                if(board[r][c].equals(TicTacToeSquare.X))
-                {
-                    disboard[(r + 2)][(c + 1)] = "X";
-                    //output.append(disboard[(r + 2)][(c + 1)]);
-                }
-                else if(board[r][c].equals(TicTacToeSquare.O))
-                {
-                    disboard[(r + 2)][(c + 1)] = "O";
-                    //output.append(disboard[(r + 2)][(c + 1)]);
-                }
-                
-            }
-        }*/
-
-        for(int roe = 0; roe < disboard.length; roe++)               // displays "  012"
-        {                                                      //           0
-            output.append("\n");                                //          1            roe = y
-                                                                    //      2            cal = z
-
-            for(int cal = 0; cal < disboard.length; cal++)
-            {
-                if(roe <= board.length)
+                if(droe <= board.length)
                 {
                     
-                    output.append(disboard[roe][cal]);
+                    output.append(disboard[droe][dcol]);
                 }
 
 
-                if((roe > 0) && (roe < (dimension + 1)) && (cal > 1)) //columns still wrong on output
+                if((droe > 0) && (droe < (dimension + 1)) && (dcol > 1))    //translates TTTSquare objects into string
                 {
-                    int r = (roe - 1);
-                    int c = (cal - 2);
+                    int r = (droe - 1);                                  // translators for the larger 2D array that is the output
+                    int c = (dcol - 2);
                     if(board[r][c].equals(TicTacToeSquare.X))
                     {
-                        disboard[roe][cal] = "X";
-                        output.append(disboard[roe][cal]);
+                        disboard[droe][dcol] = "X";
+                        output.append(disboard[droe][dcol]);
                     }
                     else if(board[r][c].equals(TicTacToeSquare.O))
                     {
-                        disboard[roe][cal] = "O";
-                        output.append(disboard[roe][cal]);
+                        disboard[droe][dcol] = "O";
+                        output.append(disboard[droe][dcol]);
                     }
                     else
                     {
-                        disboard[roe][cal] = " ";
-                        output.append(disboard[roe][cal]);
+                        disboard[droe][dcol] = " ";
+                        output.append(disboard[droe][dcol]);
                     }                        
 
                 }  
-            }    
+            }  
         }
 
         return output.toString();
