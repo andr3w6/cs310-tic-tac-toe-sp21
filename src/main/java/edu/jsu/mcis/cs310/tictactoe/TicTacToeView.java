@@ -39,7 +39,7 @@ public class TicTacToeView {
     */
     public TicTacToeMove getNextMove(boolean isXTurn) {
         
-        // INSERT YOUR CODE HERE (refer to the example output on Canvas!)
+        
 
         
         int player;
@@ -64,7 +64,7 @@ public class TicTacToeView {
 
         TicTacToeMove move = new TicTacToeMove(row, col);
 
-        return move; // this is a stub; you should remove it later!
+        return move;
 
     }
     

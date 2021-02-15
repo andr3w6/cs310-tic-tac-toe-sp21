@@ -84,18 +84,21 @@ public class TicTacToeModel {
             if(xTurn == true)
             {
                 board[r][c] = TicTacToeSquare.X;
-                xTurn = false;                    
+                xTurn = false;   
+                return true;
             }
             else
             {
                 board[r][c] = TicTacToeSquare.O;
                 xTurn = true;
+                return true;
             }                
-            return true;                            
+                                        
         }
-        else
+        else 
+        {
             return false; 
-        
+        }
     }
     
     /**

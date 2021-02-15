@@ -48,22 +48,22 @@ public class TicTacToeController {
         // INSERT YOUR CODE HERE
         while(model.isGameover() != true)
         {
-            view.showBoard(model.toString()); //step 1
+            view.showBoard(model.toString()); 
 
-            //String player_move = Integer.toString() //original step 2
-            //view.getNextMove(model.isXTurn());
             
-            TicTacToeMove move = view.getNextMove(model.isXTurn()); //step 2   might need work                                               
+            TicTacToeMove move = view.getNextMove(model.isXTurn());                                              
             
             int row = move.getRow();
             int col = move.getCol();
+            
+            boolean result = model.makeMark(row, col);
 
-            model.makeMark(row, col);    //step 3
-
-            if(model.makeMark(row, col) == false)
+            if(result == false)
             {
                 view.showInputError();
             }
+            
+            
         }
 
         
